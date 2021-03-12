@@ -151,7 +151,6 @@ class SlowMotionEditor {
 			}, 1000 / 60);
 		},
 		pause: () => {
-			console.log("paus", this.player.playingInterval);
 			this.elements.playBtn.classList.remove(this.classes.playing);
 			if (this.player.isPlaying()) {
 				this.elements.targetVideo.pause();
@@ -223,8 +222,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		},
 	};
 
-	targetVideo.addEventListener("loadedmetadata", (e) => {
+	const runnn = () => {
 		let smEditor = new SlowMotionEditor(options);
 		console.log((window.instance = smEditor));
-	});
+	};
+	console.log("readyState", targetVideo.readyState);
+	if (targetVideo.readyState !== 4) {
+		targetVideo.addEventListener("loadedmetadata", (e) => {
+			runnn();
+		});
+	} else {
+		runnn();
+	}
 });
