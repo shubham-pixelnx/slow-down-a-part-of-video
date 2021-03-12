@@ -1,0 +1,198 @@
+body {
+	background: #263238;
+	font-size: 16px;
+	user-select: none;
+}
+video {
+	width: 77.5%;
+}
+/* Player */
+.playBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.playBtn .playIcon,
+.playBtn .pauseIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.playBtn.playing .playIcon,
+.playBtn:not(.playing) .pauseIcon {
+	display: none;
+}
+
+.playBtn svg {
+	width: 50%;
+	height: 50%;
+}
+
+.fa-primary {
+	color: #fff;
+}
+.fa-secondary {
+	color: #ffffff50;
+}
+.playerWrapper {
+	margin-top: 1em;
+}
+.controls {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: 0.1fr 0.8fr 0.1fr;
+	padding: 0.1em;
+}
+.preview {
+	text-align: center;
+}
+.controls > .playBtnWrapper,
+.controls > .durationWrapper {
+	justify-self: center;
+	align-self: center;
+}
+.progressWrapper {
+	display: inline-block;
+	height: 3.5em;
+	position: relative;
+}
+.progressWrapper .progressFillWrapper {
+	border: 1px dashed rgba(255, 255, 255, 0.5);
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	min-height: 50%;
+}
+.progressWrapper .progressFillWrapper .progressFill {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 20%;
+	height: 100%;
+	background: #e65100;
+}
+.progressWrapper .progressFillWrapper .modifiedPart {
+	position: absolute;
+	left: 30%;
+	width: 20%;
+	height: 100%;
+	/* transform: translateY(-10%); */
+	background-image: url(pattern.png);
+	background-repeat: repeat;
+	background-size: 50px;
+	cursor: move;
+}
+.progressWrapper .progressFillWrapper .seeker,
+.progressWrapper .progressFillWrapper .mdfStart,
+.progressWrapper .progressFillWrapper .mdfEnd {
+	position: absolute;
+	width: 0.2em;
+	background: white;
+	height: 100%;
+	left: 20%;
+	top: 0%;
+	cursor: e-resize;
+}
+.progressWrapper .progressFillWrapper .mdfStart {
+	left: 30%;
+}
+.progressWrapper .progressFillWrapper .mdfEnd {
+	left: 50%;
+}
+.progressWrapper .progressFillWrapper .seeker:before,
+.progressWrapper .progressFillWrapper .mdfStart:before,
+.progressWrapper .progressFillWrapper .mdfEnd:before {
+	position: absolute;
+	content: "";
+	width: 20px;
+	height: 20px;
+	background: #e91e63;
+	bottom: 100%;
+	left: 50%;
+	transform: translate(-50%);
+	border-radius: 50%;
+	border: 2px solid white;
+}
+.progressWrapper .progressFillWrapper .mdfStart:before,
+.progressWrapper .progressFillWrapper .mdfEnd:before {
+	top: 100%;
+	bottom: auto;
+	background: #2196f3;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1em;
+	margin-left: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+
+label {
+	position: relative;
+	margin-right: 1em;
+	padding-left: 2em;
+	padding-right: 1em;
+	line-height: 2;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+label:before {
+	box-sizing: border-box;
+	content: " ";
+	position: absolute;
+	top: 0.3em;
+	left: 0;
+	display: block;
+	width: 1.4em;
+	height: 1.4em;
+	border: 2px solid white;
+	border-radius: 0.25em;
+	z-index: -1;
+}
+
+input[type="radio"] + label::before {
+	border-radius: 1em;
+}
+
+/* Checked */
+input[type="checkbox"]:checked + label,
+input[type="radio"]:checked + label {
+	padding-left: 1em;
+	color: black;
+}
+input[type="checkbox"]:checked + label:before,
+input[type="radio"]:checked + label:before {
+	top: 0;
+	width: 100%;
+	height: 2em;
+	background: white;
+}
+
+/* Transition */
+label,
+label::before {
+	transition: 0.25s all ease;
+}
+.modifications {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1em;
+	margin-top: 1em;
+	border: 1px solid;
+}
+
+.modifications > * h5 {
+	text-align: center;
+	opacity: 0.5;
+}

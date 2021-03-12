@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Slow Motion + Filters on a part of video</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	</head>
+	<body>
+		<div class="container white-text">
+			<div class="row">
+				<div class="col s12">
+					<div class="playerWrapper">
+						<div class="preview">
+							<video id="targetVideo" muted src="https://cdn.wedios.co/shared/invideo-sct/stunt.mp4"></video>
+						</div>
+						<div class="controls">
+							<div class="playBtnWrapper">
+								<button class="btn-floating btn-large waves-effect waves-light orange darken-4 playBtn">
+									<span class="playIcon"
+										><svg
+											aria-hidden="true"
+											focusable="false"
+											data-prefix="fad"
+											data-icon="play"
+											role="img"
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 448 512"
+											class="svg-inline--fa fa-play fa-w-14 fa-3x"
+										>
+											<g class="fa-group">
+												<path
+													fill="currentColor"
+													d="M424.41 214.66L72.41 6.55C43.81-10.34 0 6.05 0 47.87V464c0 37.5 40.69 60.09 72.41 41.3l352-208c31.4-18.54 31.5-64.14 0-82.64zM321.89 283.5L112.28 407.35C91 420 64 404.58 64 379.8V132c0-24.78 27-40.16 48.28-27.54l209.61 123.95a32 32 0 0 1 0 55.09z"
+													class="fa-secondary"
+												></path>
+												<path
+													fill="currentColor"
+													d="M112.28 104.48l209.61 123.93a32 32 0 0 1 0 55.09L112.28 407.35C91 420 64 404.58 64 379.8V132c0-24.76 27-40.14 48.28-27.52z"
+													class="fa-primary"
+												></path>
+											</g></svg
+									></span>
+									<span class="pauseIcon">
+										<svg
+											aria-hidden="true"
+											focusable="false"
+											data-prefix="fad"
+											data-icon="pause"
+											role="img"
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 448 512"
+											class="svg-inline--fa fa-pause fa-w-14 fa-3x"
+										>
+											<g class="fa-group">
+												<path
+													fill="currentColor"
+													d="M144 31H48A48 48 0 0 0 0 79v352a48 48 0 0 0 48 48h96a48 48 0 0 0 48-48V79a48 48 0 0 0-48-48zm-16 368a16 16 0 0 1-16 16H80a16 16 0 0 1-16-16V111a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16zM400 31h-96a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h96a48 48 0 0 0 48-48V79a48 48 0 0 0-48-48zm-16 368a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V111a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16z"
+													class="fa-secondary"
+												></path>
+												<path
+													fill="currentColor"
+													d="M112 95H80a16 16 0 0 0-16 16v288a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V111a16 16 0 0 0-16-16zm256 0h-32a16 16 0 0 0-16 16v288a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V111a16 16 0 0 0-16-16z"
+													class="fa-primary"
+												></path>
+											</g>
+										</svg>
+									</span>
+								</button>
+							</div>
+							<div class="progressWrapper">
+								<div class="progressFillWrapper">
+									<div class="progressFill"></div>
+									<div class="seeker"></div>
+									<div data-move="both" class="modifiedPart"></div>
+									<div data-move="start" class="mdfStart"></div>
+									<div data-move="end" class="mdfEnd"></div>
+								</div>
+							</div>
+							<div class="durationWrapper">
+								<span id="durationStats">--/--</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s1"></div>
+				<div class="col s10 modifications">
+					<div class="speedControls">
+						<div class="group">
+							<input type="radio" name="speed" id="slowest" value="0.25" />
+							<label for="slowest">0.25x</label>
+							<input type="radio" name="speed" id="slower" value="0.5" />
+							<label for="slower">0.5x</label>
+							<input type="radio" name="speed" id="slow" value="0.75" />
+							<label for="slow">0.75x</label>
+							<input type="radio" name="speed" checked id="normal" value="1" />
+							<label for="normal">1x</label>
+							<input type="radio" name="speed" id="fast" value="1.25" />
+							<label for="fast">1.25x</label>
+							<input type="radio" name="speed" id="faster" value="1.5" />
+							<label for="faster">1.5x</label>
+							<input type="radio" name="speed" id="fastest" value="2" />
+							<label for="fastest">2x</label>
+						</div>
+						<h5>Speed</h5>
+					</div>
+					<div class="filterControls">
+						<div class="group">
+							<input type="radio" checked name="filter" id="none" value="none" />
+							<label for="none">None</label>
+							<input type="radio" name="filter" id="sepia" value="sepia(1)" />
+							<label for="sepia">Sepia</label>
+							<input type="radio" name="filter" id="blacknwhite" value="saturate(0)" />
+							<label for="blacknwhite">Black&White</label>
+						</div>
+						<h5>Filter</h5>
+					</div>
+				</div>
+				<div class="col s1"></div>
+			</div>
+		</div>
+	</body>
+	<script src="leader-line.min.js"></script>
+	<script src="main.js"></script>
+</html>
